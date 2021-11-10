@@ -8,7 +8,7 @@ namespace System.Reflection {
         internal bool[] _byRef;
         public ParameterModifier(int paramaterCount) {
             if (paramaterCount <= 0)
-                throw new ArgumentException(Environment.GetResourceString("Arg_ParmArraySize"));
+                throw new ArgumentException("Must specify one or more parameters");
 
             _byRef = new bool[paramaterCount];
         }
