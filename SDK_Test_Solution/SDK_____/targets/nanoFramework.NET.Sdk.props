@@ -1,0 +1,76 @@
+<!--
+***********************************************************************************************
+nanoFramework.NET.Sdk.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (c) .NET Foundation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <!-- Fake paths to keep msbuild happy -->
+    <_TargetFrameworkDirectories>C:\I_AM_A_DUMMY_PATH</_TargetFrameworkDirectories>
+    <_FullFrameworkReferenceAssemblyPaths>C:\I_AM_A_DUMMY_PATH</_FullFrameworkReferenceAssemblyPaths>
+
+    <!-- This prevents VS from adding app.config with binding redirects -->
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <DisableHandlePackageFileConflicts>true</DisableHandlePackageFileConflicts>
+
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences> -->
+    <!-- EnablePackageValidation can probably run after adding nfproj to the task conditions  -->
+    <!-- <EnablePackageValidation>false</EnablePackageValidation> -->
+
+    <!-- Need this constant until it's replaced with the TFM one 'NETNANO1_0' -->
+    <DefineConstants>NANOFRAMEWORK_1_0</DefineConstants>
+
+  </PropertyGroup>
+
+  <!-- Fake properties -->
+  <!-- <PropertyGroup>
+    <DotNetCompatibilityAssembly>DUMMY_ASSEMBLY.DLL</DotNetCompatibilityAssembly>
+  </PropertyGroup> -->
+
+  <PropertyGroup>
+    <ProjectSystemBase>$(MSBuildThisFileDirectory)</ProjectSystemBase>
+    
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+
+    <Name>$(MSBuildProjectName)</Name>
+  </PropertyGroup>
+
+    <!-- <PropertyGroup>
+      <OutputPath>bin\$(Configuration)\</OutputPath>
+
+    </PropertyGroup> -->
+
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- TODO add documentation about this
+    See https://msdn.microsoft.com/en-us/library/ms242202.aspx
+    See https://msdn.microsoft.com/en-us/library/ms171262.aspx
+    -->
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DebuggerFlavor>NanoDebugger</DebuggerFlavor>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RestorePackagesConfig>true</RestorePackagesConfig>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk"/>
+
+</Project>

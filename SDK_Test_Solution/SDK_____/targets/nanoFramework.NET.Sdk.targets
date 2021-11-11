@@ -1,0 +1,128 @@
+<!--
+***********************************************************************************************
+nanoFramework.NET.Sdk.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (c) .NET Foundation. All rights reserved.
+***********************************************************************************************
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <TargetFrameworkIdentifier>.NETnanoFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkMoniker>$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker>
+    <NuGetTargetMoniker>netnano</NuGetTargetMoniker>
+    <TargetFrameworkMonikerDisplayName>.NET nanoFramework 1.0</TargetFrameworkMonikerDisplayName>
+    <GenerateTargetFrameworkAttribute>true</GenerateTargetFrameworkAttribute>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+
+  <!-- The need for the following properties is TBD -->
+  <PropertyGroup>
+    <!-- <TargetingClr2Framework>true</TargetingClr2Framework> -->
+  </PropertyGroup>
+
+  <!-- <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" /> -->
+
+  <!-- FAKE -->
+  <!-- <Target Name="CreateManifestResourceNames" /> -->
+  <!-- FAKE -->
+  <!-- <Target Name="CoreCompile" /> -->
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  
+  <!--Importing project specific targets **AFTER** Microsoft.NET.Sdk targets so that project specific xaml rules can override those defined in MSBuild-->
+  <Import Project="$(MSBuildThisFileDirectory)\nanoFramework.ProjectSystem.targets" />
+
+  
+  <!-- <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup> -->
+
+
+  <!-- ProjectCapabilities in dev15 should be supported via NuGet packages -->
+  <!-- <ItemGroup>
+    <ProjectCapability Include="NanoCSharpProject" />
+    
+    <ProjectCapability Include="AssemblyReferences;ProjectReferences;SharedProjectReferences" />
+    <ProjectCapability Include="ProjectConfigurationsDeclaredAsItems" />
+    <ProjectCapability Include="DeclaredSourceItems;UserSourceItems" />
+    <ProjectCapability Include="CPS" />
+    <ProjectCapability Include="CSharp" />
+
+  </ItemGroup> -->
+
+  <!-- set default NF properties for CoreLibrary project -->
+  <!-- <PropertyGroup Condition="'$(NanoIsCoreLibrary)' == 'True' ">
+    <NFMDP_GENERATE_PE Condition="'$(NFMDP_GENERATE_PE)'==''">true</NFMDP_GENERATE_PE>
+    <NFMDP_DUMP_METADATA Condition="'$(NFMDP_DUMP_METADATA)'==''">true</NFMDP_DUMP_METADATA>
+    <NFMDP_GENERATE_STUBS Condition="'$(NFMDP_GENERATE_STUBS)'==''">true</NFMDP_GENERATE_STUBS>
+    <NFMDP_DAT_FILES Condition="'$(NFMDP_DAT_FILES)'==''">true</NFMDP_DAT_FILES>
+    <NFMDP_XML_FILES Condition="'$(NFMDP_XML_FILES)'==''">true</NFMDP_XML_FILES>
+  </PropertyGroup> -->
+
+  <!-- set default NF properties for regular project (not CoreLibrary) -->
+  <!-- <PropertyGroup Condition="'$(NanoIsCoreLibrary)' != 'True' Or '$(NanoIsCoreLibrary)' == '' ">
+    <NFMDP_GENERATE_PE Condition="'$(NFMDP_GENERATE_PE)'==''">false</NFMDP_GENERATE_PE>
+    <NFMDP_DUMP_METADATA Condition="'$(NFMDP_DUMP_METADATA)'==''">false</NFMDP_DUMP_METADATA>
+    <NFMDP_GENERATE_STUBS Condition="'$(NFMDP_GENERATE_STUBS)'==''">false</NFMDP_GENERATE_STUBS>
+    <NFMDP_DAT_FILES Condition="'$(NFMDP_DAT_FILES)'==''">false</NFMDP_DAT_FILES>
+    <NFMDP_XML_FILES Condition="'$(NFMDP_XML_FILES)'==''">false</NFMDP_XML_FILES>
+  </PropertyGroup> -->
+
+  <!-- set default NF properties for all projects -->
+  <!-- <PropertyGroup>
+    <NFMDP_PE_Verbose Condition="'$(NFMDP_PE_Verbose)'==''">false</NFMDP_PE_Verbose>
+    <NFMDP_PE_VerboseMinimize Condition="'$(NFMDP_PE_VerboseMinimize)'==''">false</NFMDP_PE_VerboseMinimize>
+    <NFMDP_DUMP_METADATA Condition="'$(NFMDP_DUMP_METADATA)'==''">false</NFMDP_DUMP_METADATA>
+  </PropertyGroup> -->
+
+  <!-- developer notes: need to hack this target (which exists on Microsoft.Common.CurrentVersion.targets) because it's conditions prevent it 
+from generating the TargetFrameworkMonikerAttribute file. All the rest (such as the path) seems to be OK -->
+  <Target Name="GenerateTargetFrameworkMonikerAttribute"
+            BeforeTargets="BeforeCompile"
+            DependsOnTargets="PrepareForBuild;GetReferenceAssemblyPaths"
+            Inputs="$(MSBuildToolsPath)\Microsoft.Common.targets"
+            Outputs="$(TargetFrameworkMonikerAssemblyAttributesPath)">
+
+    <PropertyGroup>
+      <TargetFrameworkMonikerAssemblyAttributeText>
+// &lt;autogenerated /&gt;
+using System%3b
+using System.Reflection%3b
+[assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(&quot;$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion)&quot;, FrameworkDisplayName = &quot;&quot;)]
+      </TargetFrameworkMonikerAssemblyAttributeText>
+    </PropertyGroup>
+
+    <WriteLinesToFile
+        File="$(TargetFrameworkMonikerAssemblyAttributesPath)"
+        Lines="$(TargetFrameworkMonikerAssemblyAttributeText)"
+        Overwrite="true"
+        ContinueOnError="true"
+        />
+
+    <ItemGroup Condition="'@(Compile)' != '' ">
+      <Compile Include="$(TargetFrameworkMonikerAssemblyAttributesPath)"/>
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup>
+    <!-- Roslyn requires the runtimemetadataversion parameter when building a core assembly -->
+    <CompilerResponseFile Condition="'$(IsCoreAssembly)' == 'true'">$(ProjectDir)coreAssembly.rsp</CompilerResponseFile>
+  </PropertyGroup>
+
+  <!-- Import MetaDataProcessor targets **AFTER** everything else-->
+  <Import Project="$(MSBuildThisFileDirectory)\nanoFramework.MDP.targets" />
+
+</Project>

@@ -1,0 +1,50 @@
+<!--
+***********************************************************************************************
+nanoFramework.ProjectSystem.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (c) .NET Foundation. All rights reserved.
+***********************************************************************************************
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- ProjectCapabilities in dev15 should be supported via NuGet packages -->
+  <!-- TODO -->
+  <ItemGroup>
+    <ProjectCapability Include="NanoCSharpProject" />
+    <!-- <ProjectCapability Include="AssemblyReferences;ProjectReferences;SharedProjectReferences" /> -->
+    <!-- <ProjectCapability Include="ProjectConfigurationsDeclaredAsItems" /> -->
+    <!-- <ProjectCapability Include="DeclaredSourceItems;UserSourceItems" /> -->
+    <!-- <ProjectCapability Include="CPS" /> -->
+    <!-- <ProjectCapability Include="CSharp" /> -->
+  </ItemGroup>
+
+  <!-- set default NF properties for CoreLibrary project -->
+  <PropertyGroup Condition="'$(NanoIsCoreLibrary)' == 'True' ">
+    <NFMDP_GENERATE_PE Condition="'$(NFMDP_GENERATE_PE)'==''">true</NFMDP_GENERATE_PE>
+    <NFMDP_DUMP_METADATA Condition="'$(NFMDP_DUMP_METADATA)'==''">true</NFMDP_DUMP_METADATA>
+    <NFMDP_GENERATE_STUBS Condition="'$(NFMDP_GENERATE_STUBS)'==''">true</NFMDP_GENERATE_STUBS>
+    <NFMDP_DAT_FILES Condition="'$(NFMDP_DAT_FILES)'==''">true</NFMDP_DAT_FILES>
+    <NFMDP_XML_FILES Condition="'$(NFMDP_XML_FILES)'==''">true</NFMDP_XML_FILES>
+  </PropertyGroup>
+
+  <!-- set default NF properties for regular project (not CoreLibrary) -->
+  <PropertyGroup Condition="'$(NanoIsCoreLibrary)' != 'True' Or '$(NanoIsCoreLibrary)' == '' ">
+    <NFMDP_GENERATE_PE Condition="'$(NFMDP_GENERATE_PE)'==''">false</NFMDP_GENERATE_PE>
+    <NFMDP_DUMP_METADATA Condition="'$(NFMDP_DUMP_METADATA)'==''">false</NFMDP_DUMP_METADATA>
+    <NFMDP_GENERATE_STUBS Condition="'$(NFMDP_GENERATE_STUBS)'==''">false</NFMDP_GENERATE_STUBS>
+    <NFMDP_DAT_FILES Condition="'$(NFMDP_DAT_FILES)'==''">false</NFMDP_DAT_FILES>
+    <NFMDP_XML_FILES Condition="'$(NFMDP_XML_FILES)'==''">false</NFMDP_XML_FILES>
+  </PropertyGroup>
+
+  <!-- set default NF properties for all projects -->
+  <PropertyGroup>
+    <NFMDP_PE_Verbose Condition="'$(NFMDP_PE_Verbose)'==''">false</NFMDP_PE_Verbose>
+    <NFMDP_PE_VerboseMinimize Condition="'$(NFMDP_PE_VerboseMinimize)'==''">false</NFMDP_PE_VerboseMinimize>
+    <NFMDP_DUMP_METADATA Condition="'$(NFMDP_DUMP_METADATA)'==''">false</NFMDP_DUMP_METADATA>
+  </PropertyGroup>
+
+</Project>
