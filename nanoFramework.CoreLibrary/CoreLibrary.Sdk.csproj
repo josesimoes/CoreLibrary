@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="nanoFramework.NET.Sdk/1.0.0">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+
+    <!--from corelcr-->
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+    <EnsureRuntimePackageDependencies>false</EnsureRuntimePackageDependencies>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <ExcludeMscorlibFacade>true</ExcludeMscorlibFacade>
+
+    <AssemblyName>mscorlib</AssemblyName>
+    <OutputName>mscorlib</OutputName>
+
+    <!--<TargetFramework>net48</TargetFramework>-->
+    <TargetFramework>netnano1.0</TargetFramework>
+
+    <!--<RestoreProjectStyle>NoRestore</RestoreProjectStyle>-->
+    
+    <!--This one maybe needed only for mscorlib-->
+    <SkipResolvePackageAssets>true</SkipResolvePackageAssets>
+
+    <DefineConstants>$(DefineConstants);NANOCLR_REFLECTION</DefineConstants>
+
+    <IsCoreAssembly>true</IsCoreAssembly>
+    <NanoIsCoreLibrary>True</NanoIsCoreLibrary>
+    
+    
+    <!--don't generate these because we are mscorlib-->
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    
+    
+    <NoStdLib>true</NoStdLib>
+    <NoCompilerStandardLib>true</NoCompilerStandardLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+  
+</Project>

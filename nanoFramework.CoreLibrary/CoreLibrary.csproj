@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+
+    <!--from corelcr-->
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+    <EnsureRuntimePackageDependencies>false</EnsureRuntimePackageDependencies>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <ExcludeMscorlibFacade>true</ExcludeMscorlibFacade>
+
+    <!--<TargetFramework>net48</TargetFramework>-->
+    <LangVersion>9.0</LangVersion>
+    <!--<RestoreProjectStyle>NoRestore</RestoreProjectStyle>-->
+    
+    <!--This one maybe needed only for mscorlib-->
+    <SkipResolvePackageAssets>true</SkipResolvePackageAssets>
+
+    <_TargetFrameworkDirectories>$(MSBuildThisFileDirectory)</_TargetFrameworkDirectories>
+    <_FullFrameworkReferenceAssemblyPaths>$(MSBuildThisFileDirectory)</_FullFrameworkReferenceAssemblyPaths>
+
+    <TargetFramework>netnano</TargetFramework>
+    <TargetFrameworkIdentifier>netnano</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkMoniker>netnano,Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker>
+    <NuGetTargetMoniker>netnano</NuGetTargetMoniker>
+    <TargetFrameworkMonikerDisplayName>.NET nanoFramework 1.0</TargetFrameworkMonikerDisplayName>
+    <GenerateTargetFrameworkAttribute>true</GenerateTargetFrameworkAttribute>
+    <GenerateManifests>true</GenerateManifests>
+    <DefineConstants>$(DefineConstants),NANOCLR_REFLECTION,NANOFRAMEWORK_1_0</DefineConstants>
+
+    <IsCoreAssembly>true</IsCoreAssembly>
+    
+    
+    <!--don't generate these because we are mscorlib-->
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    
+    
+    <NoStdLib>true</NoStdLib>
+    <NoCompilerStandardLib>true</NoCompilerStandardLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <CompilerResponseFile Condition="'$(IsCoreAssembly)' == 'true'">$(ProjectDir)coreAssembly.rsp</CompilerResponseFile>
+  </PropertyGroup>
+  
+</Project>
