@@ -53,10 +53,6 @@ Copyright (c) .NET Foundation. All rights reserved.
     </PropertyGroup> -->
 
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <!-- TODO add documentation about this
     See https://msdn.microsoft.com/en-us/library/ms242202.aspx
     See https://msdn.microsoft.com/en-us/library/ms171262.aspx
