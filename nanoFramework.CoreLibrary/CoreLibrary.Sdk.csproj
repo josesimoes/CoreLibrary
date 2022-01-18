@@ -40,7 +40,6 @@
     
     <NoStdLib>true</NoStdLib>
     <NoCompilerStandardLib>true</NoCompilerStandardLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   
