@@ -29,7 +29,9 @@ Copyright (c) .NET Foundation. All rights reserved.
   <!-- <Target Name="CoreCompile" /> -->
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-  
+  <!-- TODO confirm if this is required here -->
+  <Import Sdk="Microsoft.NET.Sdk.Publish" Project="Sdk.targets" />
+
   <!--Importing project specific targets **AFTER** Microsoft.NET.Sdk targets so that project specific xaml rules can override those defined in MSBuild-->
   <Import Project="$(MSBuildThisFileDirectory)\nanoFramework.ProjectSystem.targets" />
 
